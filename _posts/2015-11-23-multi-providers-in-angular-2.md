@@ -13,7 +13,7 @@ tags:
 topic: di
 author: pascal_precht
 relatedLinks:
-  - title: Exploring Angular 2 - Article Series
+  - title: Exploring Angular - Article Series
     url: /exploring-angular-2
 related_posts:
   - A web animations deep dive with Angular
@@ -101,7 +101,7 @@ With multi providers, we can basically provide **multiple dependencies for a sin
 
 {% highlight js %}
 
-const SOME_TOKEN: OpaqueToken = new OpaqueToken('SomeToken');
+const SOME_TOKEN = new InjectionToken<SomeToken>('[InjectionToken] SomeToken');
 
 var injector = Injector.create([
   { provide: SOME_TOKEN, useValue: 'dependency one', multi: true },
@@ -115,7 +115,7 @@ var dependencies = injector.get(SOME_TOKEN);
 
 **Note**: We usually don't create injectors manually when building Angular applications since the platform takes care of that for us. This is really just for demonstration purposes.
 
-A token can be either a string or a type. We use a string, because we don't want to create classes to represent a string value in DI. However, to provide better error messages in case something goes wrong, we can create our string token using `OpaqueToken`. We don't have to worry about this too much now. The interesting part is where we're registering our providers using the `multi: true` option.
+A token can be either a string or a type. We use a string, because we don't want to create classes to represent a string value in DI. However, to provide better error messages in case something goes wrong, we can create our string token using `InjectionToken`. We don't have to worry about this too much now. The interesting part is where we're registering our providers using the `multi: true` option.
 
 Using `multi: true` tells Angular that the provider is a multi provider. As mentioned earlier, with multi providers, we can provide multiple values for a single token in DI. That's exactly what we're doing. We have two providers, both have the same token but they provide different values. If we ask for a dependency for that token, what we get is a list of all registered and provided values.
 
